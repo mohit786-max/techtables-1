@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { GetStarted } from './GetStarted';
-import { PersonalDetails } from './PersonalDetails';
 import { EducationDetails } from './Education';
-
+import { SkillsDetails } from './skills';
+import { ExperienceDetails } from './Experience';
+import { NavBar } from './Header_recom';
 
 export class Recommendations extends Component{
     state={
@@ -12,6 +13,11 @@ export class Recommendations extends Component{
         email:'',
         address:'',
         city:'',
+        degree:'',
+        college:'',
+        percentageG: 0,
+        endYear: 0,
+        phoneNo:'',
     }
     //Proceed to next step
     nextStep= () =>{
@@ -38,34 +44,58 @@ export class Recommendations extends Component{
     }
     render(){
         const { step } = this.state;
-        const {firstName, lastName, email} = this.state;
-        const values= {firstName, lastName, email};
+        const {firstName, lastName, email,phoneNo} = this.state;
+        const values= {firstName, lastName, email,phoneNo};
         switch(step){
             case 1:
                 return(
-                    <GetStarted
-                     nextStep={this.nextStep}
-                     handleChange={this.handleChange}
-                     values={values}
-                    />
+                    <div>
+                            <NavBar/>
+                            <GetStarted
+                             prevStep={this.prevStep}
+                             nextStep={this.nextStep}
+                             handleChange={this.handleChange}
+                             values={values}
+                            />
+                        </div>
                 )
+ 
                 case 2:
                     return(
-                        <PersonalDetails
-                         prevStep={this.prevStep}
-                         nextStep={this.nextStep}
-                         handleChange={this.handleChange}
-                         values={values}
-                        />
-                    )
-                    case 3:
-                        return(
+                        <div>
+                            <NavBar/>
                             <EducationDetails
                              prevStep={this.prevStep}
                              nextStep={this.nextStep}
                              handleChange={this.handleChange}
                              values={values}
                             />
+                        </div>
+                            
+                        );
+                case 3:
+                        return(
+                            <div>
+                            <NavBar/>
+                            <SkillsDetails
+                             prevStep={this.prevStep}
+                             nextStep={this.nextStep}
+                             handleChange={this.handleChange}
+                             values={values}
+                            />
+                        </div>
+                            )
+                case 4:
+                        return(
+                            <div>
+                            <NavBar/>
+                            <ExperienceDetails
+                             prevStep={this.prevStep}
+                             nextStep={this.nextStep}
+                             handleChange={this.handleChange}
+                             values={values}
+                            />
+                        </div>
                         )
         }
     }
